@@ -1,0 +1,104 @@
+body {
+    /* background-image: url("./assests/photo.jpeg"); */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+  }
+  .navbar {
+    background: linear-gradient(90deg, #1a2a44, #2c3e50);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    padding: 1rem 0;
+  }
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .nav-link {
+    color: #dfe6e9 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  .nav-link:hover {
+    color: #00b4d8 !important; /* Bright cyan hover */
+  }
+  .cart-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(240, 245, 255, 0.9)
+    );
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
+  }
+  .cart-card:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+  }
+  .cart-icon {
+    position: relative;
+    color: #dfe6e9;
+    transition: color 0.3s ease;
+  }
+  .cart-icon:hover {
+    color: #00b4d8;
+  }
+  .cart-count {
+    position: absolute;
+    top: -12px;
+    right: -14px;
+    background: #ff4d6d; /* Vibrant pinkish-red */
+    color: white;
+    border-radius: 50%;
+    padding: 5px 9px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  .btn-primary {
+    background: linear-gradient(
+      90deg,
+      #0077b6,
+      #00b4d8
+    ); /* Gradient button */
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #00b4d8, #0077b6);
+    transform: scale(1.05);
+  }
+  /* .btn-outline-danger {
+    border-color: #ff4d6d;
+    color: #ff4d6d;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .btn-outline-danger:hover {
+    background: #ff4d6d;
+    color: white;
+    transform: scale(1.05);
+  } */
+  h2 {
+    color: #1a2a44; /* Dark navy */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  h4 {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      background: rgba(26, 42, 68, 0.95);
+      padding: 15px;
+      border-radius: 0 0 10px 10px;
+    }
+  }

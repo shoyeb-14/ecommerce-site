@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Femme Wardrobe</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        background-color: #f4f6f9;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+      }
+      
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+        color: white;
+        padding-top: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      
+      .sidebar h4 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #eee;
+      }
+      
+      .sidebar a {
+        color: #eee;
+        text-decoration: none;
+        display: block;
+        padding: 12px 20px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .sidebar a:hover, .sidebar a.active {
+        background-color: #495057;
+      }
+      
+      .sidebar a i {
+        margin-right: 10px;
+      }
+      
+      .admin-header {
+        background-color: #fff;
+        padding: 15px 20px;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      .admin-content {
+        padding: 20px;
+      }
+      
+      .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      .card-icon {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+      
+      .content-section {
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .content-section h3 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      
+      /* Icon colors */
+      .text-orders {
+        color: #007bff;
+      }
+      
+      .text-products {
+        color: #28a745;
+      }
+      
+      .text-users {
+        color: #17a2b8;
+      }
+      
+      .text-revenue {
+        color: #dc3545;
+      }
+      
+      .sidebar-toggler {
+        display: none;
+      }
+      
+      /* Only display sidebar toggler on small screens (Bootstrap's approach) */
+      @media (max-width: 991.98px) {
+        .sidebar-toggler {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <div class="row g-0">
+        <!-- Sidebar -->
+        <div class="col-12 col-lg-2 sidebar d-none d-lg-block" id="sidebar">
+          <h4 class="my-4">Admin Panel</h4>
+          <div class="nav flex-column">
+            <a class="nav-link active" href="#" id="ordersLink">
+              <i class="fas fa-box me-2"></i> Orders
+            </a>
+            <a class="nav-link" href="#" id="productsLink">
+              <i class="fas fa-tshirt me-2"></i> Products
+            </a>
+            <a class="nav-link" href="#" id="usersLink">
+              <i class="fas fa-users me-2"></i> Users
+            </a>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-12 col-lg-10 ms-auto" id="mainContent">
+          <!-- Header -->
+          <div class="admin-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <button class="btn sidebar-toggler me-2 d-lg-none" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+              </button>
+              <h1 class="h3 mb-0">Welcome, <span id="adminName">Admin</span></h1>
+            </div>
+            <button id="logoutBtnHeader" class="btn btn-sm btn-danger">
+              <i class="fas fa-sign-out-alt me-1"></i> Logout
+            </button>
+          </div>
+
+          <!-- Content -->
+          <div class="admin-content">
+            <!-- Dashboard Overview -->
+            <div class="content-section" id="dashboardOverview">
+              <h3 class="mb-4">Dashboard Overview</h3>
+              <div class="row g-4">
+                <div class="col-12 col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                      <div class="text-orders mb-3">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                      </div>
+                      <h5 class="card-title">Total Orders</h5>
+                      <p class="card-text fs-3 fw-bold text-success" id="totalOrders">--</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                      <div class="text-products mb-3">
+                        <i class="fas fa-tshirt fa-2x"></i>
+                      </div>
+                      <h5 class="card-title">Total Products</h5>
+                      <p class="card-text fs-3 fw-bold text-success" id="totalProducts">--</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                      <div class="text-users mb-3">
+                        <i class="fas fa-users fa-2x"></i>
+                      </div>
+                      <h5 class="card-title">Total Users</h5>
+                      <p class="card-text fs-3 fw-bold text-success" id="totalUsers">--</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                      <div class="text-revenue mb-3">
+                        <i class="fas fa-rupee-sign fa-2x"></i>
+                      </div>
+                      <h5 class="card-title">Revenue</h5>
+                      <p class="card-text fs-3 fw-bold text-success" id="totalRevenue">--</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div class="content-section" id="ordersSection" style="display: none">
+              <h3>Manage Orders</h3>
+              <p>Here you will see and manage all customer orders.</p>
+            </div>
+
+            <!-- Products Section -->
+            <div class="content-section" id="productsSection" style="display: none">
+              <h3>Manage Products</h3>
+              <p>List, add, or delete products.</p>
+            </div>
+
+            <!-- Users Section -->
+            <div class="content-section" id="usersSection" style="display: none">
+              <h3>Manage Users</h3>
+              <p>View and manage registered users.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar (off-canvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Admin Panel</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="nav flex-column">
+          <a class="nav-link active" href="#" id="mobileOrdersLink">
+            <i class="fas fa-box me-2"></i> Orders
+          </a>
+          <a class="nav-link" href="#" id="mobileProductsLink">
+            <i class="fas fa-tshirt me-2"></i> Products
+          </a>
+          <a class="nav-link" href="#" id="mobileUsersLink">
+            <i class="fas fa-users me-2"></i> Users
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Initialize Bootstrap components
+      var offcanvasSidebar = new bootstrap.Offcanvas(document.getElementById('sidebarMenu'));
+      
+      // Toggle sidebar on mobile
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        offcanvasSidebar.toggle();
+      });
+      
+      // Navigation functionality
+      function showSection(sectionId) {
+        document.getElementById('dashboardOverview').style.display = 'none';
+        document.getElementById('ordersSection').style.display = 'none';
+        document.getElementById('productsSection').style.display = 'none';
+        document.getElementById('usersSection').style.display = 'none';
+        
+        document.getElementById(sectionId).style.display = 'block';
+      }
+      
+      // function setActiveLink(navLinks, activeLink) {
+      //   navLinks.forEach(function(link) {
+      //     link.classList.remove('active');
+      //   });
+      //   activeLink.classList.add('active');
+      // }
+      
+      // Desktop navigation
+      // document.getElementById('ordersLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('ordersSection');
+      //   setActiveLink(document.querySelectorAll('.sidebar .nav-link'), this);
+      // });
+      
+      // document.getElementById('productsLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('productsSection');
+      //   setActiveLink(document.querySelectorAll('.sidebar .nav-link'), this);
+      // });
+      
+      // document.getElementById('usersLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('usersSection');
+      //   setActiveLink(document.querySelectorAll('.sidebar .nav-link'), this);
+      // });
+      
+      // Mobile navigation
+      // document.getElementById('mobileOrdersLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('ordersSection');
+      //   setActiveLink(document.querySelectorAll('.offcanvas .nav-link'), this);
+      //   offcanvasSidebar.hide();
+      // });
+      
+      // document.getElementById('mobileProductsLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('productsSection');
+      //   setActiveLink(document.querySelectorAll('.offcanvas .nav-link'), this);
+      //   offcanvasSidebar.hide();
+      // });
+      
+      // document.getElementById('mobileUsersLink').addEventListener('click', function(e) {
+      //   e.preventDefault();
+      //   showSection('usersSection');
+      //   setActiveLink(document.querySelectorAll('.offcanvas .nav-link'), this);
+      //   offcanvasSidebar.hide();
+      // });
+    </script>
+    <script src="./admin.js"></script>
+  </body>
+</html>

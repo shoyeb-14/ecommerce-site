@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Femme Wardrobe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container mt-5 pt-5">
+      <div class="row g-4 justify-content-center">
+        <!-- Men's Collection Card -->
+        <div class="col-md-4 col-sm-6">
+          <div class="card shadow-sm">
+            <div class="card-img-container">
+              <img src="./assests/men collection.jpg" class="card-img-top" alt="Men's Collection">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="text-light fw-bolder">Men's Collection</h3>
+              <p class="text-light fw-bold  ">Explore our latest men's fashion.</p>
+              <a href="collection.html?category=mens" class="btn btn-dark w-100">View Collection</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Women's Collection Card -->
+        <div class="col-md-4 col-sm-6">
+          <div class="card shadow-sm">
+            <div class="card-img-container">
+              <img src="./assests/women collection.jpg" class="card-img-top " alt="Women's Collection">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="text-light fw-bolder">Women's Collection</h3>
+              <p class="text-light fw-bold">Discover elegant styles for women.</p>
+              <a href="collection.html?category=womens" class="btn btn-dark w-100">View Collection</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jewelry Collection Card -->
+        <div class="col-md-4 col-sm-6">
+          <div class="card shadow-sm">
+            <div class="card-img-container">
+              <img src="./assests/jewelry collection.jpeg" class="card-img-top" alt="Jewelry">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="text-light fw-bolder">Jewelry</h3>
+              <p class="text-light fw-bold">Trendy jewels</p>
+              <a href="collection.html?category=jewelry" class="btn btn-dark w-100">View Collection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Load navbar
+        $("#navbar-placeholder").load("navbar.html");
+        
+        // Add padding to body to account for fixed navbar
+        $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+      });
+    </script>
+  </body>
+</html>

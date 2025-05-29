@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Femme Wardrobe</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/8e95a6a194.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark me-auto"
+      id="navbarcontainer"
+    >
+      <div class="container mt-0">
+        <a class="navbar-brand fw-bolder fs-3" href="#">Wardrobe</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav mx-3 gap-4 fw-bold fs-5">
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="collection.html?category=mens"
+                >Mens wear</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="collection.html?category=womens"
+                >Women wear</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link fw-bold"
+                href="collection.html?category=jewelry"
+                >Jewelry</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex align-items-center gap-5">
+          <a href="./cart.html" class="text-light cart-icon">
+            <i class="fa-solid fa-bag-shopping fs-4"></i>
+            <span class="cart-count badge bg-danger rounded-circle">0</span>
+          </a>
+          <div class="d-flex align-items-center user-icon">
+            <a href="#" class="text-decoration-none text-light fw-bolder">
+              <i class="fa-solid fa-user fs-4 me-0"></i>
+              <span id="user-info" class="d-none d-lg-inline fw-bold"
+                >User</span
+              >
+            </a>
+          </div>
+          <div class="ms-lg-3 btn btn-primary" id="logoutbtn">
+            <a
+              href="./login.html"
+              class="btn btn-primary text-light w-100 w-lg-auto"
+            >
+              Log Out
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      $(document).ready(function () {
+        if (sessionStorage.getItem("user_name")) {
+          $("#user-info").text(sessionStorage.getItem("user_name"));
+          $("#logoutbtn").text("Log out");
+        } else {
+          $("#logoutbtn").text("Login");
+        }
+        $("#logoutbtn").click(function (e) {
+          e.preventDefault();
+          if (sessionStorage.getItem("user_name")) {
+            sessionStorage.removeItem("user_name"); 
+            $("#user-info").text("User "); 
+            $(this).text("Login"); 
+          } else {
+            window.location.href = "login.html";
+          }
+        });
+      });
+    </script>
+    <script src="./main.js"></script>
+  </body>
+</html>
